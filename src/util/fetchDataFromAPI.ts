@@ -29,7 +29,6 @@ export const fetchDataFromAPI =
               const requestOptions: RequestInit = {
                 method,
                 headers,
-                mode: 'no-cors'
               };
 
               if (data) requestOptions.body = JSON.stringify(data);
