@@ -7,7 +7,7 @@ export const useAudit = () => {
  const get = async () => {
   try {
    const res = await fetchDataFromAPI({ url: "/auditing" })
-   setData(prev => ({ ...prev, values: res?.values || [], error: null }))
+   setData(prev => ({ ...prev, values: res?.values || [] }))
   } catch (error) {
    setData(prev => ({ ...prev, error }))
   } finally {

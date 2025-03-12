@@ -11,9 +11,21 @@ import {MAX_RETRIES, PUBLIC_STRAPI_HOST} from '../env/config'
  * @throws {Error} Si se produce un error en la solicitud.
  */
 export const fetchDataFromAPI =
-    async({url, method = 'GET', data, token}:
+    async({url, method = 'POST', data, token}:
               {url: string, method?: string, data?: Object, token?: string}):
         Promise<any> => {
+          const userid: number =
+              parseInt(localStorage.getItem('userid') || '0');
+          const uType: string = localStorage.getItem('uType') || '';
+          let origin: string = ''
+          try {
+            const resIP = await fetch('https://api.ipify.org?format=json');
+            const resJSON = await resIP.json();
+            origin = resJSON.ip;
+          } catch (error) {
+            console.error('Error al obtener la IP:', error);
+          }
+          data = {...data, user: userid, origin, uType, channel: 'W'} as Object;
           let retries = 0;
           let errorResponse: Error|null = null;
 
