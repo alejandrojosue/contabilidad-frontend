@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {ListAudit} from '../components/ListAudit'
+import Login from '../components/Login'
+---
+
+<Layout>
+  <h1 class="text-3xl">Login</h1>
+  <!-- <ListAudit client:load/> -->
+   <Login client:only/>
+</Layout>

@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="flex flex-col items-center justify-center h-screen text-center">
+    <h1 class="text-4xl font-bold text-red-600">Acceso No Autorizado</h1>
+    <p class="text-lg text-gray-700 mt-4">No tienes permiso para ver esta página.</p>
+    
+    <button 
+      class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
+      onclick="history.back()"
+    >
+      Regresar
+    </button>
+  </div>
+</Layout>
