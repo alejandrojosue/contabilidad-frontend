@@ -1,4 +1,5 @@
 ---
+import Container from "../components/Layout";
 ---
 
 <!doctype html>
@@ -11,6 +12,8 @@
 		<title>SYSCON</title>
 	</head>
 	<body>
+		<Container client:only>
 			<slot />
+		</Container>
 	</body>
 </html>
