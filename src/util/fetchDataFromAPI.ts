@@ -63,6 +63,7 @@ export const fetchDataFromAPI = async ({
           400: 'Datos no válidos',
           404: 'Recurso no encontrado',
           500: 'Ha ocurrido un error en el servidor',
+          503: 'Servicio no disponible. Por favor, intente más tarde.',
         };
 
         throw new Error(errorMessages[response.status] || response.statusText);
