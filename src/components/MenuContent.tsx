@@ -1,4 +1,3 @@
-import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -15,8 +14,8 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 
 const mainListItems = [
   { text: 'Home', icon: <HomeRoundedIcon />, link: '/dashboard' },
-  { text: 'Analytics', icon: <AnalyticsRoundedIcon />, link: '' },
-  { text: 'Clients', icon: <PeopleRoundedIcon />, link: '' },
+  { text: 'Analytics', icon: <AnalyticsRoundedIcon />, link: '/dashboard' },
+  { text: 'Clients', icon: <PeopleRoundedIcon />, link: '/dashboard' },
   { text: 'Tasks', icon: <AssignmentRoundedIcon />, link: '/auditing' },
 ];
 
