@@ -17,17 +17,19 @@ import ForgotPassword from './ForgotPassword';
 import AppTheme from '../theme/AppTheme';
 import ColorModeSelect from '../theme/ColorModeSelect';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
-import { returnIP } from '../util/returnIP';
+import { fetchDataFromAPI } from '../util/fetchDataFromAPI';
+import { setCookie } from '../util/cookies';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignSelf: 'center',
-  width: '100%',  // Usa todo el ancho disponible
+  width: '100%',
   padding: theme.spacing(4),
+  gap: theme.spacing(2),
+  margin: 'auto',
   [theme.breakpoints.up('sm')]: {
-    width: '450px',
-    minHeight: '90vh',
+    maxWidth: '450px',
   },
   boxShadow:
     'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
@@ -38,7 +40,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
-  height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
+  // height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
   minHeight: '100%',
   padding: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {
@@ -66,7 +68,6 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
-  const [ip, setIP] = React.useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -77,22 +78,30 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   };
 
   const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (emailError || passwordError) {
-      event.preventDefault();
       return;
     }
     const data = new FormData(event.currentTarget);
-    setIP(await returnIP())
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      origin: ip
-    });
+    const res = await fetchDataFromAPI({
+      url: '/auth/login',
+      method: 'POST',
+      data: {
+        identifier: data.get('email'),
+        password: data.get('password')
+      }
+    })
+    if(!res){
+      console.log({res})
+    }else {
+      setCookie('email',res.email)
+      setCookie('token', res.jwt)
+      setCookie('idUser',res.id)
+      setCookie('username',res.username)
+      location.href = '/dashboard'
+    }
+   
   };
-
-  const handleIP = async()=>{
-    
-  }
 
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;

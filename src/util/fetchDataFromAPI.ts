@@ -1,4 +1,5 @@
 import { MAX_RETRIES, PUBLIC_STRAPI_HOST } from '../env/config';
+import { getCookie } from './cookies';
 
 /**
  * Realiza una solicitud a la API y devuelve los datos.
@@ -14,17 +15,15 @@ export const fetchDataFromAPI = async ({
   url,
   method = 'POST',
   data,
-  token,
 }: {
   url: string;
   method?: string;
   data?: Object;
-  token?: string;
 }): Promise<any> => {
   const userid: number = parseInt(localStorage.getItem('userid') || '0');
-  const uType: string = localStorage.getItem('uType') || '';
+  const uType: string = localStorage.getItem('uType') || 'USER';
   let origin: string = '';
-
+  const token = getCookie('token')
   try {
     const resIP = await fetch('https://api.ipify.org?format=json');
     const resJSON = await resIP.json();
@@ -32,23 +31,22 @@ export const fetchDataFromAPI = async ({
   } catch (error) {
     console.error('Error al obtener la IP:', error);
   }
-
-  data = { ...data, user: userid, origin, uType, channel: 'W' } as Object;
+  data = { ...data, user: userid, ipAddress: origin, uType, channel: 'W' } as Object;
   let retries = 0;
   let errorResponse: Error | null = null;
-
+  
   while (retries < MAX_RETRIES) {
     try {
       if (!url || typeof url !== 'string') throw new Error('La URL no es válida.');
-
+      
       let headers: HeadersInit = { 'Content-Type': 'application/json' };
       if (token) headers['Authorization'] = `Bearer ${token}`;
-
+      
       const requestOptions: RequestInit = {
         method,
         headers,
       };
-
+      
       if (data) requestOptions.body = JSON.stringify(data);
 
       const response = await fetch(PUBLIC_STRAPI_HOST + url, requestOptions);
