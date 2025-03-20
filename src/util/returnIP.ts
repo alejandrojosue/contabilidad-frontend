@@ -5,7 +5,7 @@ export const returnIP = async ():Promise<string> => {
     const resJSON = await resIP.json();
     origin = resJSON.ip;
   } catch (error) {
-    console.error('Error al obtener la IP:', error);
+    console.error('Error al obtener la IP:', (error as Error).message);
   }
   return origin
 }

@@ -92,7 +92,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       }
     })
     if(!res){
-      console.log({res})
+      
     }else {
       setCookie('email',res.email)
       setCookie('token', res.jwt)

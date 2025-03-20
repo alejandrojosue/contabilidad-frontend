@@ -6,15 +6,31 @@ import Container from "../components/Layout";
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>SYSCON</title>
 	</head>
 	<body>
-
 		<Container client:only>
 			<slot />
 		</Container>
+		<script>
+			import { date } from 'astro:schema';
+import {returnIP} from '../util/returnIP'
+			const ip = await returnIP()
+			const data = {
+				address: ip
+			};
+			console.log(
+						"%c¡Advertencia!",
+						"color: red; font-size: 35px; font-weight: bold;",
+					);
+					console.log(
+						`%cEsta función del navegador está pensada para desarrolladores. Si alguien te indicó que copiaras y pegaras algo aquí para habilitar una función de Facebook o para "hackear" la cuenta de alguien, se trata de un fraude. Si lo haces, esta persona podrá acceder a tu cuenta.`,
+						"color: black;  font-size: 1.2em;",
+					);
+					console.table(data)
+		</script>
 	</body>
 </html>

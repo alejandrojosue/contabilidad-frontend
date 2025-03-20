@@ -1,5 +1,6 @@
 import { MAX_RETRIES, PUBLIC_STRAPI_HOST } from '../env/config';
 import { getCookie } from './cookies';
+import { returnIP } from './returnIP';
 
 /**
  * Realiza una solicitud a la API y devuelve los datos.
@@ -22,15 +23,9 @@ export const fetchDataFromAPI = async ({
 }): Promise<any> => {
   const userid: number = parseInt(localStorage.getItem('userid') || '0');
   const uType: string = localStorage.getItem('uType') || 'USER';
-  let origin: string = '';
   const token = getCookie('token')
-  try {
-    const resIP = await fetch('https://api.ipify.org?format=json');
-    const resJSON = await resIP.json();
-    origin = resJSON.ip;
-  } catch (error) {
-    console.error('Error al obtener la IP:', error);
-  }
+  let origin: string = await returnIP();
+  
   data = { ...data, user: userid, ipAddress: origin, uType, channel: 'W' } as Object;
   let retries = 0;
   let errorResponse: Error | null = null;
@@ -52,8 +47,11 @@ export const fetchDataFromAPI = async ({
       const response = await fetch(PUBLIC_STRAPI_HOST + url, requestOptions);
 
       if (!response.ok) {
-        if (response.status === 401 || response.status === 403) {
-          window.location.href = '/unauthorized';
+        const d = await response.json()
+        console.log({response: d})
+
+        if (response.status === 403) {
+          // window.location.href = '/unauthorized';
           return;
         }
 
@@ -61,6 +59,7 @@ export const fetchDataFromAPI = async ({
           400: 'Datos no válidos',
           404: 'Recurso no encontrado',
           500: 'Ha ocurrido un error en el servidor',
+          503: 'Servicio no disponible. Por favor, intente más tarde.',
         };
 
         throw new Error(errorMessages[response.status] || response.statusText);
