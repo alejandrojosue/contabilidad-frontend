@@ -1,7 +1,3 @@
----
-import Container from "../components/Layout";
----
-
 <!doctype html>
 <html lang="es">
 	<head>
@@ -12,9 +8,7 @@ import Container from "../components/Layout";
 		<title>SYSCON</title>
 	</head>
 	<body>
-		<Container client:only>
 			<slot />
-		</Container>
 		<script>
 			import {alertConsole} from '../util/alertConsole'
 			await alertConsole()

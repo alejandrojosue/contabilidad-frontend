@@ -1,3 +1,4 @@
+import { errorResponse } from '../../types/types';
 import { MAX_RETRIES, PUBLIC_STRAPI_HOST } from '../env/config';
 import { getCookie } from './cookies';
 import { returnIP } from './returnIP';
@@ -46,24 +47,22 @@ export const fetchDataFromAPI = async ({
 
       const response = await fetch(PUBLIC_STRAPI_HOST + url, requestOptions);
 
-      if (!response.ok) {
-        const d = await response.json()
-        console.log({response: d})
+      // if (!response.ok) {
 
-        if (response.status === 403) {
-          // window.location.href = '/unauthorized';
-          return;
-        }
+      //   if (response.status === 403) {
+      //     // window.location.href = '/unauthorized';
+      //     return;
+      //   }
 
-        const errorMessages: { [key: number]: string } = {
-          400: 'Datos no válidos',
-          404: 'Recurso no encontrado',
-          500: 'Ha ocurrido un error en el servidor',
-          503: 'Servicio no disponible. Por favor, intente más tarde.',
-        };
+      //   const errorMessages: { [key: number]: string } = {
+      //     400: 'Datos no válidos',
+      //     404: 'Recurso no encontrado',
+      //     500: 'Ha ocurrido un error en el servidor',
+      //     503: 'Servicio no disponible. Por favor, intente más tarde.',
+      //   };
 
-        throw new Error(errorMessages[response.status] || response.statusText);
-      }
+      //   throw new Error(errorMessages[response.status] || response.statusText);
+      // }
 
       const responseData = await response.json();
       return responseData;
@@ -80,6 +79,6 @@ export const fetchDataFromAPI = async ({
 
   console.error(`Failed to fetch data after ${MAX_RETRIES} attempts: ${errorResponse ? errorResponse.message : ''}`);
 
-  if (errorResponse?.message === 'Failed to fetch') throw new Error('No hay conexión con el servidor');
-  throw new Error(`${errorResponse ? errorResponse.message : ''}`);
+  if (errorResponse?.message === 'Failed to fetch') return {error: {msg: "Servicio no disponible. Por favor intentelo más tarde.", details:[]}} as errorResponse;
+  return {error: {msg: errorResponse ? errorResponse.message : '', details:[]}} as errorResponse
 };

@@ -105,7 +105,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
+    // const password = document.getElementById('password') as HTMLInputElement;
 
     let isValid = true;
 
@@ -118,14 +118,17 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       setEmailErrorMessage('');
     }
 
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage('');
-    }
+    setPasswordError(false);
+    setPasswordErrorMessage('');
+
+    // if (!password.value || password.value.length < 6) {
+    //   setPasswordError(true);
+    //   setPasswordErrorMessage('Password must be at least 6 characters long.');
+    //   isValid = false;
+    // } else {
+    //   setPasswordError(false);
+    //   setPasswordErrorMessage('');
+    // }
 
     return isValid;
   };

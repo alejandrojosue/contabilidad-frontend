@@ -1,0 +1,9 @@
+---
+import ConfirmationPage from "../../components/ConfirmationPage";
+import Layout from "../../layouts/LayoutSimple.astro";
+const { token } = Astro.params;
+---
+
+<Layout>
+ <ConfirmationPage token={token ?? ""} client:only />
+</Layout>
