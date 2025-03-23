@@ -6,18 +6,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
-import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import ForgotPassword from './ForgotPassword';
-import AppTheme from '../theme/AppTheme';
-import ColorModeSelect from '../theme/ColorModeSelect';
+import AppTheme from '@theme/AppTheme';
+import ColorModeSelect from '@theme/ColorModeSelect';
 import { SitemarkIcon } from './CustomIcons';
-import { fetchDataFromAPI } from '../util/fetchDataFromAPI';
-import { setCookie } from '../util/cookies';
+import { fetchDataFromAPI } from '@util/fetchDataFromAPI';
+import { setCookie } from '@util/cookies';
+import { Link } from '@mui/material';
+import { userResponse } from '@type/types';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -50,7 +50,6 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [confirmPasswordError, setConfirmPasswordError] = React.useState(false);
   const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] = React.useState('');
-  const [open, setOpen] = React.useState(false);
   const [termsAccepted, setTermsAccepted] = React.useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -59,7 +58,6 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
       return;
     }
     const data = new FormData(event.currentTarget);
-    console.log({ data: data.get('email') })
     const res = await fetchDataFromAPI({
       url: '/auth/register',
       method: 'POST',
@@ -69,11 +67,11 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
         password: data.get('password'),
         idRol: 1
       }
-    });
-    if (res) {
+    }) as userResponse;
+    if (!res.error) {
       setCookie('email', res.email);
       setCookie('token', res.jwt);
-      setCookie('idUser', res.id);
+      setCookie('idUser', res.id.toString());
       setCookie('username', res.username);
       location.href = '/dashboard';
     }
@@ -187,6 +185,16 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
               }} />
               } label="I accept the terms and conditions" />
             <Button type="submit" fullWidth variant="contained" onClick={validateInputs} disabled={!termsAccepted}>Sign up</Button>
+            <Typography sx={{ textAlign: 'center' }}>
+              Have an account?{' '}
+              <Link
+                href="/signin"
+                variant="body2"
+                sx={{ alignSelf: 'center' }}
+              >
+                Sign In
+              </Link>
+            </Typography>
           </Box>
         </Card>
       </SignInContainer>

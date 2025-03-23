@@ -11,18 +11,21 @@ import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
+import StoreIcon from '@mui/icons-material/Store';
+import { getCookie, setCookie } from '@util/cookies';
 
 const mainListItems = [
-  { text: 'Home', icon: <HomeRoundedIcon />, link: '/dashboard' },
-  { text: 'Analytics', icon: <AnalyticsRoundedIcon />, link: '/dashboard' },
-  { text: 'Clients', icon: <PeopleRoundedIcon />, link: '/dashboard' },
+  { text: 'Dashboard', icon: <HomeRoundedIcon />, link: '/dashboard' },
+  { text: 'Analytics', icon: <AnalyticsRoundedIcon />, link: '/analitics' },
+  { text: 'Clientes', icon: <PeopleRoundedIcon />, link: '/customers' },
+  { text: 'Sucursales', icon: <StoreIcon />, link: '/branches' },
   { text: 'Tasks', icon: <AssignmentRoundedIcon />, link: '/auditing' },
 ];
 
 const secondaryListItems = [
-  { text: 'Settings', icon: <SettingsRoundedIcon /> },
-  { text: 'About', icon: <InfoRoundedIcon /> },
-  { text: 'Feedback', icon: <HelpRoundedIcon /> },
+  { text: 'Ajustes', icon: <SettingsRoundedIcon />, link: '/settings' },
+  { text: 'About', icon: <InfoRoundedIcon />, link: '/about' },
+  { text: 'Feedback', icon: <HelpRoundedIcon />, link: '/feedback' },
 ];
 
 export default function MenuContent() {
@@ -30,8 +33,8 @@ export default function MenuContent() {
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       <List dense>
         {mainListItems.map((item, index) => (
-          <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton selected={index === 0} href={item.link}>
+          <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={()=>setCookie('item-selected-menu', item.link)}>
+            <ListItemButton selected={getCookie('item-selected-menu') === item.link} href={item.link}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
@@ -40,8 +43,8 @@ export default function MenuContent() {
       </List>
       <List dense>
         {secondaryListItems.map((item, index) => (
-          <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton>
+          <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={()=>setCookie('item-selected-menu', item.link)}>
+            <ListItemButton selected={getCookie('item-selected-menu') === item.link} href={item.link}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>

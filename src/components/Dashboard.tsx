@@ -10,7 +10,7 @@ import HighlightedCard from './HighlightedCard';
 import PageViewsBarChart from './PageViewsBarChart';
 import SessionsChart from './SessionsChart';
 import StatCard, { StatCardProps } from './StatCard';
-import AppTheme from '../theme/AppTheme';
+import AppTheme from '@theme/AppTheme';
 
 const data: StatCardProps[] = [
   {
@@ -51,7 +51,7 @@ export default function MainGrid(props: { disableCustomTheme?: boolean }) {
       <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
         {/* cards */}
         <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-          Overview
+          General
         </Typography>
         <Grid
           container
@@ -75,7 +75,7 @@ export default function MainGrid(props: { disableCustomTheme?: boolean }) {
           </Grid>
         </Grid>
         <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-          Details
+          Detalles
         </Typography>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, lg: 9 }}>

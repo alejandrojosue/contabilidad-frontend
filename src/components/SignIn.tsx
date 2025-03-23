@@ -14,11 +14,13 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
-import AppTheme from '../theme/AppTheme';
-import ColorModeSelect from '../theme/ColorModeSelect';
+import AppTheme from '@theme/AppTheme';
+import ColorModeSelect from '@theme/ColorModeSelect';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
-import { fetchDataFromAPI } from '../util/fetchDataFromAPI';
-import { setCookie } from '../util/cookies';
+import { fetchDataFromAPI } from '@util/fetchDataFromAPI';
+import { setCookie } from '@util/cookies';
+import { userResponse } from '@type/types';
+import AlertComponent from './AlertComponent';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -67,6 +69,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
+  const [messageError, setMessageError] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -86,17 +89,18 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     const res = await fetchDataFromAPI({
       url: '/auth/login',
       method: 'POST',
+      isLogin: true,
       data: {
         identifier: data.get('email'),
         password: data.get('password')
       }
-    })
-    if(!res){
-      
+    }) as userResponse
+    if(res.error){
+      setMessageError(res.error.msg)
     }else {
       setCookie('email',res.email)
       setCookie('token', res.jwt)
-      setCookie('idUser',res.id)
+      setCookie('idUser',res.id.toString())
       setCookie('username',res.username)
       location.href = '/dashboard'
     }
@@ -120,21 +124,12 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
     setPasswordError(false);
     setPasswordErrorMessage('');
-
-    // if (!password.value || password.value.length < 6) {
-    //   setPasswordError(true);
-    //   setPasswordErrorMessage('Password must be at least 6 characters long.');
-    //   isValid = false;
-    // } else {
-    //   setPasswordError(false);
-    //   setPasswordErrorMessage('');
-    // }
-
     return isValid;
   };
 
   return (
     <AppTheme {...props}>
+      <AlertComponent type="error" message={messageError} open={!!messageError} handleClose={()=>{setMessageError('')}}/>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
@@ -236,7 +231,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             <Typography sx={{ textAlign: 'center' }}>
               Don&apos;t have an account?{' '}
               <Link
-                href="/material-ui/getting-started/templates/sign-in/"
+                href="/signup"
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >

@@ -1,11 +1,11 @@
-import ColorModeSelect from '../theme/ColorModeSelect';
+import ColorModeSelect from '@theme/ColorModeSelect';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import AppTheme from '../theme/AppTheme';
+import AppTheme from '@theme/AppTheme';
 import { SitemarkIcon } from './CustomIcons';
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -49,11 +49,11 @@ export default function NotFoundPage() {
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
         <Card variant="outlined">
           <SitemarkIcon />
-          <Typography variant="h4">404 - Page Not Found</Typography>
+          <Typography variant="h4">404 - Página no encontrada</Typography>
           <Typography variant="body1">
-            The page you are looking for might have been removed or is temporarily unavailable.
+          Es posible que la página que estás buscando haya sido eliminada o no esté disponible temporalmente.
           </Typography>
-          <Button variant="contained" onClick={() => window.history.back()}>Go Home</Button>
+          <Button variant="contained" onClick={() => window.history.back()}>Regresar</Button>
         </Card>
       </NotFoundContainer>
     </AppTheme>

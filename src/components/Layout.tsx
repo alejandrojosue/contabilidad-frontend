@@ -5,13 +5,13 @@ import Stack from '@mui/material/Stack';
 import AppNavbar from './AppNavbar';
 import Header from './Header';
 import SideMenu from './SideMenu';
-import AppTheme from '../theme/AppTheme';
+import AppTheme from '@theme/AppTheme';
 import {
   chartsCustomizations,
   dataGridCustomizations,
   datePickersCustomizations,
   treeViewCustomizations,
-} from '../theme/customizations';
+} from '@theme/customizations';
 
 const xThemeComponents = {
   ...chartsCustomizations,

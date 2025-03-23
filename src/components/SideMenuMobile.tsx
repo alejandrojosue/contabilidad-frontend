@@ -10,6 +10,7 @@ import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import MenuButton from './MenuButton';
 import MenuContent from './MenuContent';
 import CardAlert from './CardAlert';
+import { deleteAllCookies, getCookie } from '@util/cookies';
 
 interface SideMenuMobileProps {
   open: boolean | undefined;
@@ -48,7 +49,7 @@ export default function SideMenuMobile({ open, toggleDrawer }: SideMenuMobilePro
               sx={{ width: 24, height: 24 }}
             />
             <Typography component="p" variant="h6">
-              Riley Carter
+              {getCookie('username')?.toUpperCase() ?? 'USER'}
             </Typography>
           </Stack>
           <MenuButton showBadge>
@@ -62,7 +63,7 @@ export default function SideMenuMobile({ open, toggleDrawer }: SideMenuMobilePro
         </Stack>
         <CardAlert />
         <Stack sx={{ p: 2 }}>
-          <Button variant="outlined" fullWidth startIcon={<LogoutRoundedIcon />}>
+          <Button variant="outlined" fullWidth startIcon={<LogoutRoundedIcon />} onClick={()=>{deleteAllCookies(); location.href = '/signin';}}>
             Logout
           </Button>
         </Stack>

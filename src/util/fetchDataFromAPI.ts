@@ -1,4 +1,4 @@
-import { errorResponse } from '../../types/types';
+import { errorResponse } from '../types/types';
 import { MAX_RETRIES, PUBLIC_STRAPI_HOST } from '../env/config';
 import { getCookie } from './cookies';
 import { returnIP } from './returnIP';
@@ -15,19 +15,22 @@ import { returnIP } from './returnIP';
  */
 export const fetchDataFromAPI = async ({
   url,
-  method = 'POST',
+  method = 'GET',
   data,
+  isLogin = false
 }: {
   url: string;
-  method?: string;
+  method?: 'POST' | 'GET' | 'PUT' | 'DELETE';
   data?: Object;
+  isLogin?: boolean;
 }): Promise<any> => {
   const userid: number = parseInt(localStorage.getItem('userid') || '0');
   const uType: string = localStorage.getItem('uType') || 'USER';
   const token = getCookie('token')
   let origin: string = await returnIP();
-  
-  data = { ...data, user: userid, ipAddress: origin, uType, channel: 'W' } as Object;
+  if (method !== 'GET'){
+    data = { ...data, user: userid, ipAddress: origin, uType, channel: 'W' } as Object;
+  }
   let retries = 0;
   let errorResponse: Error | null = null;
   
@@ -49,10 +52,15 @@ export const fetchDataFromAPI = async ({
 
       // if (!response.ok) {
 
-      //   if (response.status === 403) {
-      //     // window.location.href = '/unauthorized';
-      //     return;
-      //   }
+        if (response.status === 401 && !isLogin) {
+          window.location.href = '/signin';
+          return;
+        }
+
+        if (response.status === 403) {
+          location.href = '/unauthorized'
+          return;
+        }
 
       //   const errorMessages: { [key: number]: string } = {
       //     400: 'Datos no válidos',

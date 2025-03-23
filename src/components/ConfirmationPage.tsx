@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import ColorModeSelect from "../theme/ColorModeSelect";
+import ColorModeSelect from "@theme/ColorModeSelect";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
-import AppTheme from "../theme/AppTheme";
+import AppTheme from "@theme/AppTheme";
 import { CheckCircleOutline, ErrorOutline } from "@mui/icons-material";
 import { useAuth } from "../hooks/useAuth";
 

@@ -1,8 +1,7 @@
 import {useState} from 'react';
 
-import {confirmResponse} from '../../types/types';
-import {fetchDataFromAPI} from '../util/fetchDataFromAPI';
-import {returnIP} from '../util/returnIP';
+import {confirmResponse} from '@type/types';
+import {fetchDataFromAPI} from '@util/fetchDataFromAPI';
 
 export const useAuth = () => {
   const [message, setMessage] = useState('');
@@ -12,11 +11,10 @@ export const useAuth = () => {
     if (retryCount >= 3) return;
     try {
       setStatus('loading')
-      const ip = await returnIP();
       const res = await fetchDataFromAPI({
                     url: '/auth/confirm',
                     method: 'POST',
-                    data: {token, ipAddress: ip, channel: 'W'},
+                    data: {token},
                   }) as confirmResponse;
 
 
@@ -39,5 +37,7 @@ export const useAuth = () => {
       confirmUser({token});
     }
   };
+
+  const getAllPermission = async()=>{}
   return {handleRetry, retryCount, status, message, confirmUser}
 }

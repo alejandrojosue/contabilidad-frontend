@@ -9,6 +9,7 @@ import SelectContent from './SelectContent';
 import MenuContent from './MenuContent';
 import CardAlert from './CardAlert';
 import OptionsMenu from './OptionsMenu';
+import { getCookie } from '@util/cookies';
 
 const drawerWidth = 240;
 
@@ -73,10 +74,10 @@ export default function SideMenu() {
         />
         <Box sx={{ mr: 'auto' }}>
           <Typography variant="body2" sx={{ fontWeight: 500, lineHeight: '16px' }}>
-            Riley Carter
+            {getCookie('username')?.toUpperCase() ?? 'USER'}
           </Typography>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            riley@email.com
+            {getCookie('email') ?? ''}
           </Typography>
         </Box>
         <OptionsMenu />
