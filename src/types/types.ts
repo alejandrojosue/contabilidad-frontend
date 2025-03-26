@@ -1,5 +1,10 @@
+type detailsErrResponse = {
+  value: string,
+  msg: string,
+}
+
 export interface errorResponse {
-  error?: {msg: string, details: []}
+  error?: {msg: string, details: Array<detailsErrResponse>}
 }
 
 export interface dataResponse<T> extends errorResponse {

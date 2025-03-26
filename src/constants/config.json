@@ -1,3 +1,29 @@
 {
- 
+ "pages": {
+  "company": {
+   "menu": "/company",
+   "options": [
+    {
+     "title": "Mi Empresa",
+     "link": "/mycompany",
+     "icon": "apartment"
+    },
+    {
+     "title": "Sucursales",
+     "link": "/branches",
+     "icon": "store"
+    },
+    {
+     "title": "Crear Sucursal",
+     "link": "/branches/create",
+     "icon": "addBusinessIcon"
+    },
+    {
+     "title": "Reportes",
+     "link": "/report",
+     "icon": "analyticsRounded"
+    }
+   ]
+  }
+ }
 }

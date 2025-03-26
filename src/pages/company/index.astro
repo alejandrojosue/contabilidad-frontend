@@ -1,0 +1,14 @@
+---
+import Layout from "@layouts/Layout.astro";
+import MenuCardOption from "@components/MenuCardOption";
+import config from "@constants/config.json";
+
+const options = config.pages.company.options.map((option) => {
+    return {...option, link: `${config.pages.company.menu}${option.link}`};
+});
+---
+
+<Layout>
+    <MenuCardOption data={options} client:only/>
+</Layout>
+

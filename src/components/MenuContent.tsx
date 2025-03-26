@@ -18,7 +18,7 @@ const mainListItems = [
   { text: 'Dashboard', icon: <HomeRoundedIcon />, link: '/dashboard' },
   { text: 'Analytics', icon: <AnalyticsRoundedIcon />, link: '/analitics' },
   { text: 'Clientes', icon: <PeopleRoundedIcon />, link: '/customers' },
-  { text: 'Sucursales', icon: <StoreIcon />, link: '/branches' },
+  { text: 'Empresa', icon: <StoreIcon />, link: '/company' },
   { text: 'Tasks', icon: <AssignmentRoundedIcon />, link: '/auditing' },
 ];
 

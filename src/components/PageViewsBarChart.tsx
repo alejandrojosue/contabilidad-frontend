@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Chip from '@mui/material/Chip';
@@ -6,12 +5,16 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { useTheme } from '@mui/material/styles';
+import { abbreviateNumber } from '@util/numberAbbreviate';
 
 export default function PageViewsBarChart() {
   const theme = useTheme();
   const colorPalette = [
+    // @ts-ignore
     (theme.vars || theme).palette.primary.dark,
+    // @ts-ignore
     (theme.vars || theme).palette.primary.main,
+    // @ts-ignore
     (theme.vars || theme).palette.primary.light,
   ];
   return (
@@ -30,7 +33,7 @@ export default function PageViewsBarChart() {
             }}
           >
             <Typography variant="h4" component="p">
-              1.3M
+              {abbreviateNumber(13249999)}
             </Typography>
             <Chip size="small" color="error" label="-8%" />
           </Stack>

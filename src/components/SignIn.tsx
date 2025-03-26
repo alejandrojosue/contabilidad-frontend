@@ -21,6 +21,8 @@ import { fetchDataFromAPI } from '@util/fetchDataFromAPI';
 import { setCookie } from '@util/cookies';
 import { userResponse } from '@type/types';
 import AlertComponent from './AlertComponent';
+import { IconButton, InputAdornment } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -71,6 +73,11 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [messageError, setMessageError] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -80,7 +87,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     setOpen(false);
   };
 
-  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (emailError || passwordError) {
       return;
@@ -95,16 +102,17 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
         password: data.get('password')
       }
     }) as userResponse
-    if(res.error){
+    if (res.error) {
       setMessageError(res.error.msg)
-    }else {
-      setCookie('email',res.email)
+    } else {
+      setCookie('email', res.email)
       setCookie('token', res.jwt)
-      setCookie('idUser',res.id.toString())
-      setCookie('username',res.username)
+      setCookie('idUser', res.id.toString())
+      setCookie('username', res.username)
+      setCookie('item-selected-menu', '/dashboard')
       location.href = '/dashboard'
     }
-   
+
   };
 
   const validateInputs = () => {
@@ -129,7 +137,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
   return (
     <AppTheme {...props}>
-      <AlertComponent type="error" message={messageError} open={!!messageError} handleClose={()=>{setMessageError('')}}/>
+      <AlertComponent type="error" message={messageError} open={!!messageError} handleClose={() => { setMessageError('') }} />
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
@@ -175,16 +183,23 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               <TextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
+                id="password"
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 placeholder="••••••"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                autoFocus
-                required
                 fullWidth
                 variant="outlined"
                 color={passwordError ? 'error' : 'primary'}
+                autoComplete="current-password"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={togglePasswordVisibility} edge="end" sx={{ border: 'none', '&:hover': { backgroundColor: 'transparent' } }}>
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
             </FormControl>
             <FormControlLabel

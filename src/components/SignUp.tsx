@@ -15,9 +15,10 @@ import AppTheme from '@theme/AppTheme';
 import ColorModeSelect from '@theme/ColorModeSelect';
 import { SitemarkIcon } from './CustomIcons';
 import { fetchDataFromAPI } from '@util/fetchDataFromAPI';
-import { setCookie } from '@util/cookies';
-import { Link } from '@mui/material';
+import { IconButton, InputAdornment, Link } from '@mui/material';
 import { userResponse } from '@type/types';
+import AlertComponent from './AlertComponent';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -51,6 +52,18 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
   const [confirmPasswordError, setConfirmPasswordError] = React.useState(false);
   const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] = React.useState('');
   const [termsAccepted, setTermsAccepted] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
+  const [messageError, setMessageError] = React.useState('');
+  const [messageType, setMessageType] = React.useState<"error" | "success">("error");
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
+
+  const togglePasswordConfirmVisibility = () => {
+    setShowPasswordConfirm(!showPasswordConfirm);
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,18 +75,17 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
       url: '/auth/register',
       method: 'POST',
       data: {
-        username: data.get('username'),
-        email: data.get('email'),
-        password: data.get('password'),
+        username: (data.get('username') as string).trim(),
+        email: (data.get('email') as string).trim(),
+        password: (data.get('password') as string).trim(),
         idRol: 1
       }
     }) as userResponse;
     if (!res.error) {
-      setCookie('email', res.email);
-      setCookie('token', res.jwt);
-      setCookie('idUser', res.id.toString());
-      setCookie('username', res.username);
-      location.href = '/dashboard';
+      setMessageError("Se ha enviado un correo de confirmación a tu dirección de correo electrónico. Por favor, sigue las instrucciones para activar tu cuenta.");
+      setMessageType("success");
+    } else {
+      setMessageError(res.error.details[0]?.msg ?? res.error.msg);
     }
   };
 
@@ -98,7 +110,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
       isValid = false;
       setUsernameError(true)
       setUsernameErrorMessage('Username is required.')
-    }else{
+    } else {
       setUsernameError(false)
       setUsernameErrorMessage('')
     }
@@ -126,6 +138,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
 
   return (
     <AppTheme {...props}>
+      <AlertComponent type={messageType} message={messageError} open={!!messageError} handleClose={() => { setMessageError('') }} />
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
@@ -139,30 +152,40 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 helperText={usernameErrorMessage}
                 error={usernameError}
                 id="username"
-                name="username" 
-                required 
-                fullWidth 
-                variant="outlined" 
+                name="username"
+                required
+                fullWidth
+                variant="outlined"
                 autoComplete="username" />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField error={emailError} helperText={emailErrorMessage} id="email" type="email" name="email" required fullWidth variant="outlined" />
             </FormControl>
-            <FormControl>
+            <FormControl variant="outlined" fullWidth>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
                 id="password"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 required
                 fullWidth
                 variant="outlined"
                 autoComplete="new-password"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={togglePasswordVisibility} edge="end" sx={{border: 'none', '&:hover': {backgroundColor: 'transparent'}}}>
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
             </FormControl>
+
 
             <FormControl>
               <FormLabel htmlFor="confirm-password">Confirm Password</FormLabel>
@@ -170,20 +193,29 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 error={confirmPasswordError}
                 helperText={confirmPasswordErrorMessage}
                 id="confirm-password"
-                type="password"
+                type={showPasswordConfirm ? 'text' : 'password'}
                 name="confirm-password"
                 required
                 fullWidth
                 variant="outlined"
                 autoComplete="new-password"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={togglePasswordConfirmVisibility} edge="end" sx={{border: 'none', '&:hover': {backgroundColor: 'transparent'}}}>
+                        {showPasswordConfirm ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
             </FormControl>
 
             <FormControlLabel control={
-              <Checkbox checked={termsAccepted} onChange={() =>{
+              <Checkbox checked={termsAccepted} onChange={() => {
                 setTermsAccepted(!termsAccepted)
               }} />
-              } label="I accept the terms and conditions" />
+            } label="I accept the terms and conditions" />
             <Button type="submit" fullWidth variant="contained" onClick={validateInputs} disabled={!termsAccepted}>Sign up</Button>
             <Typography sx={{ textAlign: 'center' }}>
               Have an account?{' '}

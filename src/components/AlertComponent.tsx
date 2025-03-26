@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -17,6 +17,13 @@ interface AlertProps {
   type: 'error' | 'success' | 'info' | 'warning';
   handleClose: () => void;
 }
+
+const titleMap = {
+  error: 'Operación rechazada',
+  success: 'Operación realizada exitosamente',
+  info: 'Información',
+  warning: 'Advertencia',
+};
 
 const iconMap = {
   error: <ErrorOutlineIcon color="error" sx={{ fontSize: 40 }} />,
@@ -43,7 +50,7 @@ export default function AlertComponent({ open, message, type, handleClose }: Ale
     >
       <DialogTitle>
         <Box display="flex" alignItems="center" gap={1}>
-          {iconMap[type]} {type.toUpperCase()}
+          {iconMap[type]}<Typography style={{fontWeight: 'bold', fontSize: '1.5em'}}>{titleMap[type]}</Typography>
         </Box>
       </DialogTitle>
       <DialogContent
