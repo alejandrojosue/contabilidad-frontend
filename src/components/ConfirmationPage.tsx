@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ColorModeSelect from "@theme/ColorModeSelect";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -54,25 +54,25 @@ export default function ConfirmationPage({ token }: { token: string }) {
         <ColorModeSelect sx={{ position: "fixed", top: "1rem", right: "1rem" }} />
         <Card variant="outlined">
           {status === "loading" ? (
-            <Typography variant="h4">Confirming your account...</Typography>
+            <Typography variant="h4">Confirmando su cuenta...</Typography>
           ) : status === "success" ? (
             <>
               <CheckCircleOutline color="success" sx={{ fontSize: 60 }} />
-              <Typography variant="h4">Confirmation Successful</Typography>
+              <Typography variant="h4">Confirmación Exitosa</Typography>
               <Typography variant="body1">{message}</Typography>
-              <Button variant="contained" onClick={() => (window.location.href = "/login")}>
-                Go to Login
+              <Button variant="contained" onClick={() => (window.location.href = "/signin")}>
+                Iniciar sesión
               </Button>
             </>
           ) : (
             <>
               <ErrorOutline color="error" sx={{ fontSize: 60 }} />
-              <Typography variant="h4">Confirmation Failed</Typography>
+              <Typography variant="h4">Confirmación Fallida</Typography>
               <Typography variant="body1">{message}</Typography>
               <Button variant="contained" color="error" onClick={()=>handleRetry({token})} disabled={retryCount >= 3}>
-                Try Again ({3 - retryCount} attempts left)
+                Inténtalo de nuevo, quedan ({3 - retryCount} intentos.)
               </Button>
-              <Button onClick={() => window.history.back()} variant="contained" sx={{ display: retryCount >= 3 ? 'block' : 'none' }}>Close</Button>
+              <Button onClick={() => window.history.back()} variant="contained" sx={{ display: retryCount >= 3 ? 'block' : 'none' }}>Cerrar</Button>
             </>
           )}
         </Card>

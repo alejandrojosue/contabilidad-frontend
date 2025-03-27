@@ -123,7 +123,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
+      setEmailErrorMessage('Por favor, ingrese un correo válido.');
       isValid = false;
     } else {
       setEmailError(false);
@@ -162,7 +162,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             }}
           >
             <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormLabel htmlFor="email">Correo electrónico</FormLabel>
               <TextField
                 error={emailError}
                 helperText={emailErrorMessage}
@@ -179,7 +179,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password">Contraseña</FormLabel>
               <TextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
@@ -244,13 +244,13 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               Sign in with Facebook
             </Button> */}
             <Typography sx={{ textAlign: 'center' }}>
-              Don&apos;t have an account?{' '}
+              ¿No tienes cuenta aún?{' '}
               <Link
                 href="/signup"
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >
-                Sign up
+                Registrarse
               </Link>
             </Typography>
           </Box>

@@ -65,6 +65,15 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
     setShowPasswordConfirm(!showPasswordConfirm);
   }
 
+  const handleClose = () => {
+    setMessageError('');
+    if (messageType === 'success') {
+      setInterval(() => {
+        window.location.href = '/signin';
+      }, 3000);
+    }
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (emailError || passwordError || confirmPasswordError || !termsAccepted) {
@@ -85,6 +94,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
       setMessageError("Se ha enviado un correo de confirmación a tu dirección de correo electrónico. Por favor, sigue las instrucciones para activar tu cuenta.");
       setMessageType("success");
     } else {
+      setMessageType("error");
       setMessageError(res.error.details[0]?.msg ?? res.error.msg);
     }
   };
@@ -99,7 +109,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
+      setEmailErrorMessage('Por favor, ingrese un correo válido.');
       isValid = false;
     } else {
       setEmailError(false);
@@ -109,15 +119,15 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
     if (!username.value) {
       isValid = false;
       setUsernameError(true)
-      setUsernameErrorMessage('Username is required.')
+      setUsernameErrorMessage('Nombre de usuario es requerido.')
     } else {
       setUsernameError(false)
       setUsernameErrorMessage('')
     }
 
-    if (!password.value || password.value.length < 6) {
+    if (!password.value || password.value.length < 8) {
       setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
+      setPasswordErrorMessage('La contraseña debe tener al menos 8 caracteres.');
       isValid = false;
     } else {
       setPasswordError(false);
@@ -138,16 +148,16 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
 
   return (
     <AppTheme {...props}>
-      <AlertComponent type={messageType} message={messageError} open={!!messageError} handleClose={() => { setMessageError('') }} />
+      <AlertComponent type={messageType} message={messageError} open={!!messageError} handleClose={handleClose} />
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
         <Card variant="outlined">
           <SitemarkIcon />
-          <Typography component="h1" variant="h4">Sign up</Typography>
+          <Typography component="h1" variant="h4">Registrarse</Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}>
             <FormControl>
-              <FormLabel htmlFor="username">Username</FormLabel>
+              <FormLabel htmlFor="username">Nombre Usuario</FormLabel>
               <TextField
                 helperText={usernameErrorMessage}
                 error={usernameError}
@@ -159,11 +169,11 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 autoComplete="username" />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormLabel htmlFor="email">Correo Electrónico</FormLabel>
               <TextField error={emailError} helperText={emailErrorMessage} id="email" type="email" name="email" required fullWidth variant="outlined" />
             </FormControl>
             <FormControl variant="outlined" fullWidth>
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password">Contraseña</FormLabel>
               <TextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
@@ -177,7 +187,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      <IconButton onClick={togglePasswordVisibility} edge="end" sx={{border: 'none', '&:hover': {backgroundColor: 'transparent'}}}>
+                      <IconButton onClick={togglePasswordVisibility} edge="end" sx={{ border: 'none', '&:hover': { backgroundColor: 'transparent' } }}>
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
@@ -188,7 +198,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
 
 
             <FormControl>
-              <FormLabel htmlFor="confirm-password">Confirm Password</FormLabel>
+              <FormLabel htmlFor="confirm-password">Confirmar Contraseña</FormLabel>
               <TextField
                 error={confirmPasswordError}
                 helperText={confirmPasswordErrorMessage}
@@ -202,7 +212,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      <IconButton onClick={togglePasswordConfirmVisibility} edge="end" sx={{border: 'none', '&:hover': {backgroundColor: 'transparent'}}}>
+                      <IconButton onClick={togglePasswordConfirmVisibility} edge="end" sx={{ border: 'none', '&:hover': { backgroundColor: 'transparent' } }}>
                         {showPasswordConfirm ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
@@ -216,15 +226,15 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 setTermsAccepted(!termsAccepted)
               }} />
             } label="I accept the terms and conditions" />
-            <Button type="submit" fullWidth variant="contained" onClick={validateInputs} disabled={!termsAccepted}>Sign up</Button>
+            <Button type="submit" fullWidth variant="contained" onClick={validateInputs} disabled={!termsAccepted}>Registrarse</Button>
             <Typography sx={{ textAlign: 'center' }}>
-              Have an account?{' '}
+              ¿Tienes una cuenta?{' '}
               <Link
                 href="/signin"
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >
-                Sign In
+                Iniciar sesión
               </Link>
             </Typography>
           </Box>
