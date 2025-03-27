@@ -31,10 +31,10 @@ export default function MenuCardOption({ data }: MenuCardOptionProps) {
         container
         spacing={3}
         justifyContent="flex-start"
-        sx={{ width: "100%", maxWidth: "1200px", margin: "auto", padding: 2 }}
+        sx={{ width: "100%", maxWidth: "1200px", margin: "auto", padding: 0 }}
       >
         {data.map((item, index) => (
-          <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+          <Grid key={index} padding={1} xs={12} sm={6} md={4} lg={3}>
             <CardOption title={item.title} link={item.link}>
               {/* @ts-ignore */}
               {Icons[item.icon]}

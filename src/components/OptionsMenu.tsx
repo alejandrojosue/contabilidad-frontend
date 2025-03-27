@@ -10,11 +10,11 @@ import ListItemIcon, { listItemIconClasses } from '@mui/material/ListItemIcon';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from './MenuButton';
-import { deleteAllCookies } from '@util/cookies';
+import { deleteAllCookies, setCookie } from '@util/cookies';
 
 const MenuItem = styled(MuiMenuItem)({
   margin: '2px 0',
-  padding: '0 20px',
+  padding: '5px 20px',
 });
 
 export default function OptionsMenu() {
@@ -26,6 +26,12 @@ export default function OptionsMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleClickOption = ({link}:{link:string}) => {
+    handleClose();
+    location.href = link;
+    setCookie('item-selected-menu', link);
+  }
   return (
     <React.Fragment>
       <MenuButton
@@ -55,7 +61,7 @@ export default function OptionsMenu() {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Perfil</MenuItem>
+        <MenuItem onClick={()=>handleClickOption({link:'/account'})}>Perfil</MenuItem>
         <MenuItem onClick={handleClose}>Mi empresa</MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>Ajustes</MenuItem>
