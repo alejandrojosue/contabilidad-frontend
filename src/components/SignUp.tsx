@@ -165,12 +165,13 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 name="username"
                 required
                 fullWidth
+                placeholder='Nombre de usuario'
                 variant="outlined"
                 autoComplete="username" />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="email">Correo Electrónico</FormLabel>
-              <TextField error={emailError} helperText={emailErrorMessage} id="email" type="email" name="email" required fullWidth variant="outlined" />
+              <TextField error={emailError} placeholder='tu@correo.com' helperText={emailErrorMessage} id="email" type="email" name="email" required fullWidth variant="outlined" />
             </FormControl>
             <FormControl variant="outlined" fullWidth>
               <FormLabel htmlFor="password">Contraseña</FormLabel>
@@ -184,6 +185,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 fullWidth
                 variant="outlined"
                 autoComplete="new-password"
+                placeholder='••••••'
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -206,6 +208,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 type={showPasswordConfirm ? 'text' : 'password'}
                 name="confirm-password"
                 required
+                placeholder='••••••'
                 fullWidth
                 variant="outlined"
                 autoComplete="new-password"

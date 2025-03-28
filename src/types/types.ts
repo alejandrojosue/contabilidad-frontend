@@ -17,6 +17,8 @@ export interface userResponse extends errorResponse {
 
 export interface confirmResponse extends Pick<userResponse, 'id' | 'email'>, errorResponse {}
 
+export interface resetResponse extends confirmResponse {}
+
 export class dartea implements errorResponse{};
 
 export type actions = 'POST'|'PUT'|'GET'|'DELETE'

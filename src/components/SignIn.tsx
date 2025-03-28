@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -23,6 +22,7 @@ import { userResponse } from '@type/types';
 import AlertComponent from './AlertComponent';
 import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import CustomButton from './CustomButton';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -74,6 +74,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const [messageError, setMessageError] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -90,27 +91,35 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (emailError || passwordError) {
+      setIsLoading(false)
       return;
     }
-    const data = new FormData(event.currentTarget);
-    const res = await fetchDataFromAPI({
-      url: '/auth/login',
-      method: 'POST',
-      isLogin: true,
-      data: {
-        identifier: data.get('email'),
-        password: data.get('password')
+    setIsLoading(true)
+    try {
+      const data = new FormData(event.currentTarget);
+      const res = await fetchDataFromAPI({
+        url: '/auth/login',
+        method: 'POST',
+        isLogin: true,
+        data: {
+          identifier: data.get('email'),
+          password: data.get('password')
+        }
+      }) as userResponse
+      if (res.error) {
+        setMessageError(res.error.msg)
+      } else {
+        setCookie('email', res.email)
+        setCookie('token', res.jwt)
+        setCookie('idUser', res.id.toString())
+        setCookie('username', res.username)
+        setCookie('item-selected-menu', '/dashboard')
+        location.href = '/dashboard'
       }
-    }) as userResponse
-    if (res.error) {
-      setMessageError(res.error.msg)
-    } else {
-      setCookie('email', res.email)
-      setCookie('token', res.jwt)
-      setCookie('idUser', res.id.toString())
-      setCookie('username', res.username)
-      setCookie('item-selected-menu', '/dashboard')
-      location.href = '/dashboard'
+    } catch (error) {
+
+    } finally {
+      setIsLoading(false)
     }
 
   };
@@ -169,7 +178,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="your@email.com"
+                placeholder="tu@correo.com"
                 autoComplete="email"
                 autoFocus
                 required
@@ -207,14 +216,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               label="Remember me"
             />
             <ForgotPassword open={open} handleClose={handleClose} />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              onClick={validateInputs}
-            >
-              Sign in
-            </Button>
+            <CustomButton type="submit" text="Iniciar sesión" loading={isLoading} fullWidth variant="contained" onClick={validateInputs} />
             <Link
               component="button"
               type="button"
@@ -222,7 +224,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               variant="body2"
               sx={{ alignSelf: 'center' }}
             >
-              Forgot your password?
+              ¿Olvidaste tu contraseña?
             </Link>
           </Box>
           {/* <Divider>or</Divider> */}

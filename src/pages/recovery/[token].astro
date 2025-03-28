@@ -1,0 +1,9 @@
+---
+import PasswordResetPage from "@components/PasswordResetPage";
+import Layout from "@layouts/LayoutSimple.astro";
+const { token } = Astro.params;
+---
+
+<Layout>
+ <PasswordResetPage token={token ?? ""} client:only />
+</Layout>
