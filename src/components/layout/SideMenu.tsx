@@ -5,10 +5,10 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import SelectContent from './SelectContent';
-import MenuContent from './MenuContent';
-import CardAlert from './CardAlert';
-import OptionsMenu from './OptionsMenu';
+import SelectContent from '@clayout/SelectContent';
+import MenuContent from '@clayout/MenuContent';
+import CardAlert from '@common/CardAlert';
+import OptionsMenu from '@clayout/OptionsMenu';
 import { getCookie } from '@util/cookies';
 
 const drawerWidth = 240;

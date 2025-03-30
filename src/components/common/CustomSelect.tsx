@@ -11,7 +11,9 @@ import FormLabel from '@mui/material/FormLabel';
 const Avatar = styled(MuiAvatar)(({ theme }) => ({
   width: 28,
   height: 28,
+  // @ts-ignore
   backgroundColor: (theme.vars || theme).palette.background.paper,
+  // @ts-ignore
   color: (theme.vars || theme).palette.text.secondary,
   border: `1px solid ${theme.palette.divider}`,
 }));

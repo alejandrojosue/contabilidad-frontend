@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -47,7 +46,7 @@ export default function SessionsChart() {
     <Card variant="outlined" sx={{ width: '100%' }}>
       <CardContent>
         <Typography component="h2" variant="subtitle2" gutterBottom>
-          Sessions
+          Tabla comparativa
         </Typography>
         <Stack sx={{ justifyContent: 'space-between' }}>
           <Stack
@@ -64,7 +63,7 @@ export default function SessionsChart() {
             <Chip size="small" color="success" label="+35%" />
           </Stack>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            Sessions per day for the last 30 days
+            Comparando los últimos 30 días
           </Typography>
         </Stack>
         <LineChart
@@ -78,8 +77,8 @@ export default function SessionsChart() {
           ]}
           series={[
             {
-              id: 'direct',
-              label: 'Direct',
+              id: 'sales',
+              label: 'Ventas',
               showMark: false,
               curve: 'linear',
               stack: 'total',
@@ -92,8 +91,8 @@ export default function SessionsChart() {
               ],
             },
             {
-              id: 'referral',
-              label: 'Referral',
+              id: 'expenses',
+              label: 'Gastos',
               showMark: false,
               curve: 'linear',
               stack: 'total',
@@ -106,8 +105,8 @@ export default function SessionsChart() {
               ],
             },
             {
-              id: 'organic',
-              label: 'Organic',
+              id: 'purchases',
+              label: 'Compras',
               showMark: false,
               curve: 'linear',
               stack: 'total',
@@ -124,14 +123,14 @@ export default function SessionsChart() {
           margin={{ left: 50, right: 20, top: 20, bottom: 20 }}
           grid={{ horizontal: true }}
           sx={{
-            '& .MuiAreaElement-series-organic': {
-              fill: "url('#organic')",
+            '& .MuiAreaElement-series-expenses': {
+              fill: "url('#expenses')",
             },
-            '& .MuiAreaElement-series-referral': {
-              fill: "url('#referral')",
+            '& .MuiAreaElement-series-purchases': {
+              fill: "url('#purchases')",
             },
-            '& .MuiAreaElement-series-direct': {
-              fill: "url('#direct')",
+            '& .MuiAreaElement-series-sales': {
+              fill: "url('#sales')",
             },
           }}
           slotProps={{
@@ -140,9 +139,9 @@ export default function SessionsChart() {
             },
           }}
         >
-          <AreaGradient color={theme.palette.primary.dark} id="organic" />
-          <AreaGradient color={theme.palette.primary.main} id="referral" />
-          <AreaGradient color={theme.palette.primary.light} id="direct" />
+          <AreaGradient color={theme.palette.primary.dark} id="expenses" />
+          <AreaGradient color={theme.palette.primary.main} id="purchases" />
+          <AreaGradient color={theme.palette.primary.light} id="sales" />
         </LineChart>
       </CardContent>
     </Card>

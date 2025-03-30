@@ -13,11 +13,11 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import AppTheme from '@theme/AppTheme';
 import ColorModeSelect from '@theme/ColorModeSelect';
-import { SitemarkIcon } from './CustomIcons';
+import { SitemarkIcon } from '@common/CustomIcons';
 import { fetchDataFromAPI } from '@util/fetchDataFromAPI';
 import { IconButton, InputAdornment, Link } from '@mui/material';
 import { userResponse } from '@type/types';
-import AlertComponent from './AlertComponent';
+import AlertComponent from '@common/AlertComponent';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -39,6 +39,19 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   padding: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4),
+  }, '&::before': {
+    content: '""',
+    display: 'block',
+    position: 'absolute',
+    zIndex: -1,
+    inset: 0,
+    backgroundImage:
+      'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
+    backgroundRepeat: 'no-repeat',
+    ...theme.applyStyles('dark', {
+      backgroundImage:
+        'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
+    }),
   },
 }));
 
@@ -197,8 +210,6 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 }}
               />
             </FormControl>
-
-
             <FormControl>
               <FormLabel htmlFor="confirm-password">Confirmar Contraseña</FormLabel>
               <TextField
@@ -223,7 +234,6 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
                 }}
               />
             </FormControl>
-
             <FormControlLabel control={
               <Checkbox checked={termsAccepted} onChange={() => {
                 setTermsAccepted(!termsAccepted)

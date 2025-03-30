@@ -25,6 +25,15 @@
       "@components/*": [
         "src/components/*"
       ],
+      "@common/*": [
+        "src/components/common/*"
+      ],
+      "@cpages/*": [
+        "src/components/pages/*"
+      ],
+      "@clayout/*": [
+        "src/components/layout/*"
+      ],
       "@constants/*": [
         "src/constants/*"
       ],
@@ -40,6 +49,6 @@
       "@type/*": [
         "src/types/*"
       ]
-    },
+    }
   }
 }

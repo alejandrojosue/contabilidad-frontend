@@ -1,7 +1,13 @@
 {
  "pages": {
+  "account": {
+   "menu": "/account",
+   "label": "Perfil",
+   "options": []
+  },
   "company": {
    "menu": "/company",
+   "label": "Empresa",
    "options": [
     {
      "title": "Mi Empresa",
@@ -24,6 +30,37 @@
      "icon": "analyticsRounded"
     }
    ]
+  },
+  "contability": {
+   "menu": "/contability",
+   "label": "Contabilidad",
+   "options": [
+    {
+     "title": "Cuentas Contables",
+     "link": "/chartOfAccounts",
+     "icon": "accountBalance"
+    },
+    {
+     "title": "Transacciones",
+     "link": "/transactions",
+     "icon": "accountBalance"
+    },
+    {
+     "title": "Ajustes Contables",
+     "link": "/accountingAdjustments",
+     "icon": "accountBalance"
+    },
+    {
+     "title": "Ajustes",
+     "link": "/settings",
+     "icon": "settingsIcon"
+    }
+   ]
+  },
+  "dashboard": {
+   "menu": "/dashboard",
+   "label": "Dashboard",
+   "options": []
   }
  }
 }

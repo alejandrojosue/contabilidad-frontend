@@ -12,17 +12,17 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import ForgotPassword from './ForgotPassword';
+import ForgotPassword from '@components/ForgotPassword';
 import AppTheme from '@theme/AppTheme';
 import ColorModeSelect from '@theme/ColorModeSelect';
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
+import { GoogleIcon, FacebookIcon, SitemarkIcon } from '@common/CustomIcons';
 import { fetchDataFromAPI } from '@util/fetchDataFromAPI';
 import { setCookie } from '@util/cookies';
 import { userResponse } from '@type/types';
-import AlertComponent from './AlertComponent';
+import AlertComponent from '@common/AlertComponent';
 import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import CustomButton from './CustomButton';
+import CustomButton from '@common/CustomButton';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -157,7 +157,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
           >
-            Sign in
+            Iniciar sesión
           </Typography>
           <Box
             component="form"

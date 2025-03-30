@@ -1,22 +1,19 @@
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { customer } from '../types/types';
-import { esES } from '@mui/x-data-grid/locales';
+import { DataGrid } from '@mui/x-data-grid';
+import { columns, rows } from '../../internals/data/gridData';
 
-export default function CustomizedDataGrid({ rows, columns, loading }: { rows: Array<customer>, columns: Array<GridColDef>, loading: boolean}) {
+export default function CustomizedDataGrid() {
   return (
     <DataGrid
       checkboxSelection
       rows={rows}
-      loading={loading}
       columns={columns}
       getRowClassName={(params) =>
         params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
       }
-      localeText={esES.components.MuiDataGrid.defaultProps.localeText}
       initialState={{
         pagination: { paginationModel: { pageSize: 20 } },
       }}
-      pageSizeOptions={[10, 20, 50, 100]}
+      pageSizeOptions={[10, 20, 50]}
       disableColumnResize
       density="compact"
       slotProps={{

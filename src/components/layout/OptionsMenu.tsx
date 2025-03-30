@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon, { listItemIconClasses } from '@mui/material/ListItemIcon';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
-import MenuButton from './MenuButton';
+import MenuButton from '@common/MenuButton';
 import { deleteAllCookies, setCookie } from '@util/cookies';
 
 const MenuItem = styled(MuiMenuItem)({

@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import { COLUMNS_CUSTOMER } from "@constants/datagridHeaders";
-import CustomizedDataGrid from "./CustomizedDataGrid2";
+import CustomizedDataGrid from "@common/CustomizedDataGrid2";
 import AppTheme from "@theme/AppTheme";
 import { useCustomer } from "@hooks/useCustomer";
 import { useEffect, useState } from "react";
-import AlertComponent from "./AlertComponent";
+import AlertComponent from "@common/AlertComponent";
 import config from "@constants/config.json"
 
 export default function ListCustomers() {

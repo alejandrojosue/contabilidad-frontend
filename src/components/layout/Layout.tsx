@@ -6,6 +6,8 @@ import AppNavbar from './AppNavbar';
 import Header from './Header';
 import SideMenu from './SideMenu';
 import AppTheme from '@theme/AppTheme';
+import Copyright from '@clayout/Copyright';
+
 import {
   chartsCustomizations,
   dataGridCustomizations,
@@ -55,6 +57,7 @@ export default function Layout({ disableCustomTheme, children }: DashboardProps)
           >
             <Header />
             {children}
+            <Copyright sx={{ my: 4, position: 'fixed', bottom: 5 }} />
           </Stack>
         </Box>
       </Box>

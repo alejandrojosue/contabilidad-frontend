@@ -12,6 +12,9 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import StoreIcon from '@mui/icons-material/Store';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { getCookie, setCookie } from '@util/cookies';
 
 const mainListItems = [
@@ -20,10 +23,12 @@ const mainListItems = [
   { text: 'Clientes', icon: <PeopleRoundedIcon />, link: '/customers' },
   { text: 'Empresa', icon: <StoreIcon />, link: '/company' },
   { text: 'Tasks', icon: <AssignmentRoundedIcon />, link: '/auditing' },
+  { text: 'Contabilidad', icon: <CollectionsBookmarkIcon />, link: '/contability' },
 ];
 
 const secondaryListItems = [
   { text: 'Ajustes', icon: <SettingsRoundedIcon />, link: '/settings' },
+  { text: 'Perfil', icon: <AccountCircleIcon />, link: '/account' },
   { text: 'About', icon: <InfoRoundedIcon />, link: '/about' },
   { text: 'Feedback', icon: <HelpRoundedIcon />, link: '/feedback' },
 ];

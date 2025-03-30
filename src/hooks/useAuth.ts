@@ -66,6 +66,7 @@ export const useAuth = () => {
       async ({password, email}: {password: string, email: string}) => {
     try {
       setStatus('loading')
+      setMessage('')
       const res = await fetchDataFromAPI({
                     url: '/auth/password-reset',
                     method: 'POST',
@@ -77,6 +78,7 @@ export const useAuth = () => {
         setStatus('error');
       }else{
         setStatus('success');
+        setMessage('¡Tu contraseña ha sido restablecida exitosamente! 🎉');
       }
     } catch (error) {
       setMessage('Se produjo un error de red. Inténtalo de nuevo.');

@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { resetResponse } from '@type/types';
 import { fetchDataFromAPI } from '@util/fetchDataFromAPI';
 import { useState } from 'react';
-import CustomButton from './CustomButton';
+import CustomButton from '@common/CustomButton';
 
 interface ForgotPasswordProps {
   open: boolean;

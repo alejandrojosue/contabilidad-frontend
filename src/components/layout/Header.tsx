@@ -1,12 +1,11 @@
-import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
-import CustomDatePicker from './CustomDatePicker';
-import NavbarBreadcrumbs from './NavbarBreadcrumbs';
-import MenuButton from './MenuButton';
-import ColorModeIconDropdown from '.././theme/ColorModeIconDropdown';
+import CustomDatePicker from '@common/CustomDatePicker';
+import NavbarBreadcrumbs from '@clayout/NavbarBreadcrumbs';
+import MenuButton from '@common/MenuButton';
+import ColorModeIconDropdown from '@theme/ColorModeIconDropdown';
 
-import Search from './Search';
+import Search from '@common/Search';
 
 export default function Header() {
   return (

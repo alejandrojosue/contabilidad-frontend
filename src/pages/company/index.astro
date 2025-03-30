@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import MenuCardOption from "@components/MenuCardOption";
+import MenuCardOption from "@common/MenuCardOption";
 import config from "@constants/config.json";
 
 const options = config.pages.company.options.map((option) => {
@@ -9,6 +9,7 @@ const options = config.pages.company.options.map((option) => {
 ---
 
 <Layout>
-    <MenuCardOption data={options} client:only/>
+    <!-- @ts-ignore -->
+    <MenuCardOption data={options} title="Menú empresa" client:only/>
 </Layout>
 
