@@ -8,7 +8,7 @@ import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import AppTheme from "@theme/AppTheme";
 import { CheckCircleOutline, ErrorOutline } from "@mui/icons-material";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",

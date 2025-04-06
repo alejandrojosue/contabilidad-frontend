@@ -1,16 +1,19 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 const handleRegresar = () => history.back()
 
 const handleCrear = (link: string) => location.href = link
 
-export default function TopActionsBar({linkGo, isPDF = true, isExcel = true}: { linkGo: string, isPDF?: boolean, isExcel?: boolean }) {
+export default function TopActionsBar({ linkGo, isPDF = true, isExcel = true }: { linkGo: string, isPDF?: boolean, isExcel?: boolean }) {
  return (
   <Box display="flex" justifyContent={"end"} width={"100%"} my={2}>
+   <Typography component="h2" variant="h6" sx={{ mb: 2, width: "100%", my: "auto" }}>
+    {document.title}
+   </Typography>
    <Button
     variant="outlined"
     color="primary"
-    sx={{ mr: .5}}
+    sx={{ mr: .5 }}
     onClick={handleRegresar}
    >
     Regresar
@@ -30,7 +33,7 @@ export default function TopActionsBar({linkGo, isPDF = true, isExcel = true}: { 
    <Button
     variant="contained"
     color="primary"
-    sx={{ ml: .5}}
+    sx={{ ml: .5 }}
     onClick={() => handleCrear(linkGo)}
    >
     Crear

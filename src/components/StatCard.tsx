@@ -7,12 +7,11 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { SparkLineChart } from '@mui/x-charts/SparkLineChart';
 import { areaElementClasses } from '@mui/x-charts/LineChart';
+import { abbreviateNumber } from '@util/numberAbbreviate';
 
 export type StatCardProps = {
   title: string;
-  value: string;
   interval: string;
-  trend: 'up' | 'down' | 'neutral';
   data: number[];
 };
 
@@ -44,9 +43,7 @@ function AreaGradient({ color, id }: { color: string; id: string }) {
 
 export default function StatCard({
   title,
-  value,
   interval,
-  trend,
   data,
 }: StatCardProps) {
   const theme = useTheme();
@@ -73,10 +70,11 @@ export default function StatCard({
     neutral: 'default' as const,
   };
 
-  const color = labelColors[trend];
-  const chartColor = trendColors[trend];
-  const trendValues = { up: '+25%', down: '-25%', neutral: '+5%' };
-
+  // @ts-ignore
+  const percentage = (((data[data.length - 1] - data[0]) / data[0]).toFixed(2)) * 100 || 0
+  const total = data.reduce((acc, item) => acc + item, 0)
+  const color = labelColors[percentage < 0 ? 'down' : percentage > 0 ? 'up' : 'neutral'];
+  const chartColor = trendColors[percentage < 0 ? 'down' : percentage > 0 ? 'up' : 'neutral'];
   return (
     <Card variant="outlined" sx={{ height: '100%', flexGrow: 1 }}>
       <CardContent>
@@ -93,9 +91,11 @@ export default function StatCard({
               sx={{ justifyContent: 'space-between', alignItems: 'center' }}
             >
               <Typography variant="h4" component="p">
-                {value}
+                {abbreviateNumber(total)}
               </Typography>
-              <Chip size="small" color={color} label={trendValues[trend]} />
+              <Chip size="small" color={color} label={
+                percentage + '%'
+              } />
             </Stack>
             <Typography variant="caption" sx={{ color: 'text.secondary' }}>
               {interval}
@@ -114,11 +114,11 @@ export default function StatCard({
               }}
               sx={{
                 [`& .${areaElementClasses.root}`]: {
-                  fill: `url(#area-gradient-${value})`,
+                  fill: `url(#area-gradient-${total})`,
                 },
               }}
             >
-              <AreaGradient color={chartColor} id={`area-gradient-${value}`} />
+              <AreaGradient color={chartColor} id={`area-gradient-${total}`} />
             </SparkLineChart>
           </Box>
         </Stack>

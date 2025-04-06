@@ -21,10 +21,10 @@ export default function HighlightedCard() {
           gutterBottom
           sx={{ fontWeight: '600' }}
         >
-          Explore your data
+          Explora tus datos
         </Typography>
         <Typography sx={{ color: 'text.secondary', mb: '8px' }}>
-          Uncover performance and visitor insights with our data wizardry.
+        Descubra insights clave sobre sus visitantes con nuestros datos.
         </Typography>
         <Button
           variant="contained"
@@ -33,7 +33,7 @@ export default function HighlightedCard() {
           endIcon={<ChevronRightRoundedIcon />}
           fullWidth={isSmallScreen}
         >
-          Get insights
+          Obtenga información
         </Button>
       </CardContent>
     </Card>

@@ -11,6 +11,7 @@ import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import SideMenuMobile from '@clayout/SideMenuMobile';
 import MenuButton from '@common/MenuButton';
 import ColorModeIconDropdown from '@theme/ColorModeIconDropdown';
+import { getCookie } from '@util/cookies';
 
 const Toolbar = styled(MuiToolbar)({
   width: '100%',
@@ -34,7 +35,6 @@ export default function AppNavbar() {
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
-
   return (
     <AppBar
       position="fixed"
@@ -65,7 +65,7 @@ export default function AppNavbar() {
           >
             <CustomIcon />
             <Typography variant="h4" component="h1" sx={{ color: 'text.primary' }}>
-              Dashboard
+              {document.title}
             </Typography>
           </Stack>
           <ColorModeIconDropdown />
