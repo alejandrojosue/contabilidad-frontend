@@ -172,3 +172,45 @@ export const COLUMNS_CUSTOMER: GridColDef[] = [
     renderCell: renderNewestCell,
   },
 ];
+
+export const COLUMNS_BRANCH: GridColDef[] = [
+  { field: 'branch_name', headerName: 'Branch Name', flex: 1.5, minWidth: 200 }, // Nueva columna
+  {
+    field: 'branch_is_active',
+    headerName: 'Status',
+    flex: 0.5,
+    minWidth: 80,
+    renderCell: (params) => renderStatus(params.value as any), // Nueva columna
+  },
+  {
+    field: 'branch_owner',
+    headerName: 'Owner',
+    headerAlign: 'right',
+    align: 'right',
+    flex: 1,
+    minWidth: 120,
+  },
+  {
+    field: 'branch_address',
+    headerName: 'Address',
+    headerAlign: 'right',
+    align: 'right',
+    flex: 1,
+    minWidth: 150,
+  },
+  {
+    field: 'branch_email',
+    headerName: 'Email',
+    headerAlign: 'right',
+    align: 'right',
+    flex: 1,
+    minWidth: 180,
+  },
+  {
+    field: 'branch_phones',
+    headerName: 'Phones',
+    flex: 1,
+    minWidth: 180,
+    // renderCell: (params) => renderPhones(params.value as Array<string>), // Nueva columna
+  }
+];

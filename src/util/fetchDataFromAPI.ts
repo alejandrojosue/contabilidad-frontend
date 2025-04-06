@@ -24,6 +24,8 @@ export const fetchDataFromAPI = async ({
   data?: Object;
   isLogin?: boolean;
 }): Promise<any> => {
+  if(!navigator.onLine) return {error: {msg: "No hay conexión a internet", details:[]}} as errorResponse;
+  console.log({connected: navigator.onLine})
   const userid: number = parseInt(localStorage.getItem('userid') || '0');
   const uType: string = localStorage.getItem('uType') || 'USER';
   const token = getCookie('token')

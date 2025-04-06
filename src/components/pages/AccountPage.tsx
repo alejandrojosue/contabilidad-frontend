@@ -1,10 +1,9 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Box, Button, TextField, Typography, Grid, MenuItem, Select, FormControl, InputLabel, CssBaseline, FormLabel, InputAdornment, IconButton } from "@mui/material";
+import { Box, Button, TextField, Typography, Grid, FormControl, CssBaseline, FormLabel, InputAdornment, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import AppTheme from "@theme/AppTheme";
 import { useState } from "react";
 import CustomSelect from '@common/CustomSelect';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
 import TranslateIcon from '@mui/icons-material/Translate';
 import { getCookie } from "@util/cookies";
 import ColorModeSelect from "@theme/ColorModeSelect";
@@ -19,13 +18,6 @@ const Container = styled(Box)(({ theme }) => ({
 
 const Section = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderRadius: theme.shape.borderRadius,
-  boxShadow:
-    'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
-  ...theme.applyStyles('dark', {
-    boxShadow:
-      'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px',
-  }),
 }));
 
 const ProfileHeader = styled(Box)(({ theme }) => ({
@@ -34,13 +26,6 @@ const ProfileHeader = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   width: "100%",
   padding: theme.spacing(2),
-  borderRadius: theme.shape.borderRadius,
-  boxShadow:
-    'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
-  ...theme.applyStyles('dark', {
-    boxShadow:
-      'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px',
-  }),
 }));
 
 const Avatar = styled("img")({
@@ -59,6 +44,29 @@ export default function AccountPage() {
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] = useState('');
   const [language, setLanguage] = useState('es');
+
+  const [formValues, setFormValues] = useState({
+    nombre: '',
+    apellido: '',
+    email: getCookie("email") || '',
+    username: getCookie("username") || '',
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+    language: 'es',
+  });
+
+  const [initialValues] = useState(formValues);
+  // @ts-ignore
+  const handleChange = (field) => (event) => {
+    const value = event.target.value;
+    setFormValues((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const hasChanges = JSON.stringify(formValues) !== JSON.stringify(initialValues);
 
   !getCookie("email") ? window.location.href = "/signin" : null
 
@@ -79,7 +87,7 @@ export default function AccountPage() {
               <Typography variant="body2">Gestiona la información de tu cuenta y el avatar</Typography>
             </Box>
           </Box>
-          <Button variant="contained">Guardar</Button>
+          <Button variant="contained" disabled={!hasChanges}>Guardar</Button>
         </ProfileHeader>
 
         {/* Perfil */}
@@ -99,6 +107,9 @@ export default function AccountPage() {
                   variant="outlined"
                   placeholder="John"
                   fullWidth
+                  value={formValues.nombre}
+                  sx={{ cursor: 'pointer' }}
+                  onChange={handleChange('nombre')}
                 />
               </FormControl>
             </Grid>
@@ -114,6 +125,7 @@ export default function AccountPage() {
                   placeholder="White"
                   variant="outlined"
                   fullWidth
+                  onChange={handleChange('apellido')}
                 />
               </FormControl>
             </Grid>
@@ -130,6 +142,7 @@ export default function AccountPage() {
                   variant="outlined"
                   fullWidth
                   defaultValue={getCookie("email")}
+                  onChange={handleChange('email')}
                 />
               </FormControl>
             </Grid>
@@ -143,6 +156,7 @@ export default function AccountPage() {
                   required
                   variant="outlined"
                   fullWidth
+                  onChange={handleChange('username')}
                 />
               </FormControl>
             </Grid>
@@ -169,6 +183,7 @@ export default function AccountPage() {
                   placeholder="••••••"
                   fullWidth
                   variant="outlined"
+                  onChange={handleChange('currentPassword')}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -200,6 +215,7 @@ export default function AccountPage() {
                   fullWidth
                   variant="outlined"
                   autoComplete="new-password"
+                  onChange={handleChange('newPassword')}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -230,6 +246,7 @@ export default function AccountPage() {
                   fullWidth
                   variant="outlined"
                   autoComplete="new-password"
+                  onChange={handleChange('confirmPassword')}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -254,8 +271,10 @@ export default function AccountPage() {
           <Typography variant="h6" gutterBottom>Experiencia de Usuario</Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <FormLabel>Tema</FormLabel>
-              <ColorModeSelect fullWidth />
+              <FormControl fullWidth>
+                <FormLabel>Tema</FormLabel>
+                <ColorModeSelect fullWidth />
+              </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
               <CustomSelect
@@ -270,7 +289,6 @@ export default function AccountPage() {
             </Grid>
           </Grid>
         </Section>
-
       </Container>
     </AppTheme>
   );

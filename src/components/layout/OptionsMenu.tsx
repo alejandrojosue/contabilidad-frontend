@@ -30,7 +30,7 @@ export default function OptionsMenu() {
   const handleClickOption = ({link}:{link:string}) => {
     handleClose();
     location.href = link;
-    setCookie('item-selected-menu', link);
+    link.split('/').length > 1 ? setCookie('item-selected-menu', '/' + link.split('/')[1]) : setCookie('item-selected-menu', link);
   }
   return (
     <React.Fragment>
@@ -62,7 +62,7 @@ export default function OptionsMenu() {
         }}
       >
         <MenuItem onClick={()=>handleClickOption({link:'/account'})}>Perfil</MenuItem>
-        <MenuItem onClick={handleClose}>Mi empresa</MenuItem>
+        <MenuItem onClick={()=>handleClickOption({link:'/company/mycompany'})}>Mi empresa</MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>Ajustes</MenuItem>
         <Divider />
