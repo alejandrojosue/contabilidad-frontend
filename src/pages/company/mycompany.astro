@@ -1,8 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import MyCompanyPage from "@components/pages/company/MyCompanyPage"
+import DynamicFormPage from "@components/pages/FormPage";
 ---
 
 <Layout>
- <MyCompanyPage client:only />
+ <DynamicFormPage title="Registrar Empresa" formName="company"  client:only/>
 </Layout>

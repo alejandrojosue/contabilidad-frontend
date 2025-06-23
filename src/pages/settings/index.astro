@@ -1,0 +1,12 @@
+---
+import MenuCardOption from "@components/common/MenuCardOption";
+import config from "@constants/config.json";
+import Layout from "@layouts/Layout.astro";
+const options = config.pages.settings.options.map((option) => {
+    return {...option, link: `${config.pages.settings.menu}${option.link}`};
+});
+---
+<Layout>
+    <!-- @ts-ignore -->
+    <MenuCardOption data={options} title="Menú configuraciones" client:only/>
+</Layout>

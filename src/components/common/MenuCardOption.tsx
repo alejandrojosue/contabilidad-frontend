@@ -6,7 +6,17 @@ import Store from "@mui/icons-material/Store";
 import AnalyticsRounded from "@mui/icons-material/AnalyticsRounded";
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import SettingsIcon from '@mui/icons-material/Settings';
+import MessageIcon from '@mui/icons-material/Message';
 import { Box, Typography } from "@mui/material";
+import CategoryIcon from '@mui/icons-material/Category';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import GroupIcon from '@mui/icons-material/Group';
+import AppsIcon from '@mui/icons-material/Apps';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
+import EmailIcon from '@mui/icons-material/Email';
+import HistoryIcon from '@mui/icons-material/History';
 
 interface CardProps {
   title: string;
@@ -26,6 +36,17 @@ const Icons = {
   store: <Store fontSize="large" />,
   analyticsRounded: <AnalyticsRounded fontSize="large" />,
   settingsIcon: <SettingsIcon fontSize="large" />,
+  messageIcon: <MessageIcon fontSize="large" />,
+  categoryIcon: <CategoryIcon fontSize="large" />,
+  accountCircleIcon: <AccountCircleIcon fontSize="large" />,
+  personAddIcon: <PersonAddIcon fontSize="large" />,
+  appIcon: <AppsIcon fontSize="large" />,
+  groupIcon: <GroupIcon fontSize="large" />,
+  groupAddIcon: <GroupAddIcon fontSize="large" />,
+  localPoliceIcon: <LocalPoliceIcon fontSize="large" />,
+  emailIcon: <EmailIcon fontSize="large" />,
+  historyIcon: <HistoryIcon fontSize="large" />,
+  // Add more icons as needed
 };
 
 export default function MenuCardOption({ data, title }: MenuCardOptionProps) {

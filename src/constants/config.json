@@ -61,6 +61,89 @@
    "menu": "/dashboard",
    "label": "Dashboard",
    "options": []
+  },
+  "settings": {
+   "menu": "/settings",
+   "label": "Configuraciones",
+   "options": [
+    {
+     "title": "Mensajes de Error",
+     "link": "/messages",
+     "icon": "messageIcon"
+    },
+    {
+     "title": "Notificaciones",
+     "link": "/notifications",
+     "icon": "emailIcon"
+    },
+    {
+     "title": "Tipos de banca",
+     "link": "/taxesSettings",
+     "icon": "categoryIcon"
+    },
+    {
+     "title": "Usuarios",
+     "link": "/users",
+     "icon": "accountCircleIcon"
+    }
+   ]
+  },
+  "users":{
+   "menu": "/settings/users",
+   "label": "Configuraciones",
+   "options": [
+    {
+     "title": "Usuarios",
+     "link": "/users/list",
+     "icon": "accountCircleIcon"
+    },
+    {
+     "title": "Crear Usuario",
+     "link": "/users/create",
+     "icon": "personAddIcon"
+    },
+    {
+     "title": "Roles",
+     "link": "/users/roles",
+     "icon": "groupIcon"
+    },
+    {
+     "title": "Crear Rol",
+     "link": "/users/roles/create",
+     "icon": "groupAddIcon"
+    },
+    {
+     "title": "Permisos",
+     "link": "/users/permissions",
+     "icon": "localPoliceIcon"
+    },
+    {
+     "title": "Crear Permiso",
+     "link": "/users/permissions/create",
+     "icon": "localPoliceIcon"
+    }
+   ]
+  },
+  "notifications": {
+   "menu": "/settings/notifications",
+   "label": "Notificaciones",
+   "options": [
+    {
+     "title": "Correos",
+     "link": "/notifications",
+     "icon": "emailIcon"
+    },
+    {
+     "title": "Bitácora correos",
+     "link": "/notifications/log",
+     "icon": "historyIcon"
+    },
+    {
+     "title": "Configuraciones",
+     "link": "/notifications/settings",
+     "icon": "settingsIcon"
+    }
+   ]
   }
  }
 }

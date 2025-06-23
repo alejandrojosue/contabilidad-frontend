@@ -174,6 +174,7 @@ export const COLUMNS_CUSTOMER: GridColDef[] = [
 ];
 
 export const COLUMNS_BRANCH: GridColDef[] = [
+  {field: 'id', headerName: 'Branch ID', flex: 1, minWidth: 100}, // Nueva columna
   { field: 'branch_name', headerName: 'Branch Name', flex: 1.5, minWidth: 200 }, // Nueva columna
   {
     field: 'branch_is_active',
@@ -212,5 +213,25 @@ export const COLUMNS_BRANCH: GridColDef[] = [
     flex: 1,
     minWidth: 180,
     // renderCell: (params) => renderPhones(params.value as Array<string>), // Nueva columna
+  }
+];
+
+export const COLUMNS_MESSAGE: GridColDef[] = [
+  { field: 'id', headerName: 'Id', width: 30 }, // Nueva columna
+  {
+    field: 'code',
+    headerName: 'Código',
+    headerAlign: 'center',
+    align: 'center',
+    flex: 1,
+    minWidth: 120,
+  },
+  {
+    field: 'message',
+    headerName: 'Descripción',
+    headerAlign: 'left',
+    align: 'left',
+    flex: 3,
+    minWidth: 200,
   }
 ];

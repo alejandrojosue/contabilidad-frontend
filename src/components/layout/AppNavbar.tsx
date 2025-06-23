@@ -11,7 +11,6 @@ import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import SideMenuMobile from '@clayout/SideMenuMobile';
 import MenuButton from '@common/MenuButton';
 import ColorModeIconDropdown from '@theme/ColorModeIconDropdown';
-import { getCookie } from '@util/cookies';
 
 const Toolbar = styled(MuiToolbar)({
   width: '100%',

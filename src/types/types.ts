@@ -58,3 +58,11 @@ export type branch = {
 }
 
 export interface branchResponse extends dataResponse<branch> {}
+
+export type errorMessage = {
+  id: number,
+  code: string,
+  message: string,
+}
+
+export interface errorMessageResponse extends dataResponse<errorMessage> {}

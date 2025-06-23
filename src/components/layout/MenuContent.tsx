@@ -14,15 +14,16 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import StoreIcon from '@mui/icons-material/Store';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
+
 // import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { getCookie, setCookie } from '@util/cookies';
 
 const mainListItems = [
   { text: 'Dashboard', icon: <HomeRoundedIcon />, link: '/dashboard' },
-  { text: 'Analytics', icon: <AnalyticsRoundedIcon />, link: '/analitics' },
+  { text: 'API', icon: <AnalyticsRoundedIcon />, link: '/apicalls' },
   { text: 'Clientes', icon: <PeopleRoundedIcon />, link: '/customers' },
   { text: 'Empresa', icon: <StoreIcon />, link: '/company' },
-  { text: 'Tasks', icon: <AssignmentRoundedIcon />, link: '/auditing' },
+  { text: 'Proveedores', icon: <AssignmentRoundedIcon />, link: '/auditing' },
   { text: 'Contabilidad', icon: <CollectionsBookmarkIcon />, link: '/contability' },
 ];
 

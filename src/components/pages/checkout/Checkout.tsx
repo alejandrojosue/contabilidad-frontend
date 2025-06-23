@@ -12,7 +12,7 @@ import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import AddressForm from '@cpages/checkout/AddressForm';
+import CompanyForm from '@cpages/company/CompanyForm';
 import Info from '@cpages/checkout/Info';
 import InfoMobile from '@cpages/checkout/InfoMobile';
 import PaymentForm from '@cpages/checkout/PaymentForm';
@@ -20,16 +20,26 @@ import Review from '@cpages/checkout/Review';
 import { SitemarkIcon } from '@common/CustomIcons';
 import AppTheme from '@theme/AppTheme';
 import ColorModeIconDropdown from '@theme/ColorModeIconDropdown';
+import PlanesPage from '../company/Planes';
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const products = [
+  {
+    name: 'Professional plan',
+    desc: 'Monthly subscription',
+    price: '$15.00',
+  }
+];
+const steps = ['Elige un plan', 'Payment details', 'Review your order'];
 function getStepContent(step: number) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <CompanyForm />;
     case 1:
       return <PaymentForm />;
     case 2:
-      return <Review />;
+      return <PlanesPage />;
+    case 3:
+      return <PlanesPage />;
     default:
       throw new Error('Unknown step');
   }
@@ -89,7 +99,7 @@ export default function Checkout(props: { disableCustomTheme?: boolean }) {
               maxWidth: 500,
             }}
           >
-            <Info totalPrice={activeStep >= 2 ? '$144.97' : '$134.98'} />
+            <Info totalPrice={activeStep >= 2 ? '$144.97' : '$134.98'} products={products} />
           </Box>
         </Grid>
         <Grid

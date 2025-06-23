@@ -5,7 +5,6 @@ import AppTheme from "@theme/AppTheme";
 import { useCustomer } from "@hooks/useCustomer";
 import { useEffect, useState } from "react";
 import AlertComponent from "@common/AlertComponent";
-import config from "@constants/config.json"
 
 export default function ListCustomers() {
  const { values, loading, error, get } = useCustomer();

@@ -1,5 +1,4 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { customer } from '../../types/types';
 import { esES } from '@mui/x-data-grid/locales';
 
 export default function CustomizedDataGrid({
@@ -7,12 +6,12 @@ export default function CustomizedDataGrid({
   columns,
   loading,
 }: {
-  rows: Array<customer>;
+  rows: Array<any>;
   columns: Array<GridColDef>;
   loading: boolean;
 }) {
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: 'calc(100vh - 160px)' }}>
       <DataGrid
         checkboxSelection
         rows={rows}
